@@ -126,6 +126,7 @@ $string['cannotuninstall'] = '{$a} can not be uninstalled.';
 $string['categoryemail'] = 'Email';
 $string['cfgwwwrootslashwarning'] = '$CFG->wwwroot is defined incorrectly in the config.php file. It includes a \'/\' character at the end which must be removed.';
 $string['cfgwwwrootwarning'] = '$CFG->wwwroot is defined incorrectly in the config.php file. It should match the URL you are using to access this page.';
+$string['check_router'] = 'Router configuration';
 $string['checkupgradepending'] = 'Upgrade';
 $string['cleanup'] = 'Cleanup';
 $string['clianswerno'] = 'n';
@@ -242,6 +243,7 @@ $string['configdeleteincompleteusers'] = 'After this period, any account without
 $string['configdeleteunconfirmed'] = 'For certain authentication methods, such as email-based self-registration, users must confirm their account within a certain time. After this period, any old unconfirmed accounts are deleted.';
 $string['configdenyemailaddresses'] = 'To deny email addresses from particular domains list them here in the same way.  All other domains will be accepted. To deny subdomains add the domain with a preceding \'.\'. eg <strong>hotmail.com yahoo.co.uk .live.com</strong>';
 $string['configenableanalytics'] = 'Analytics models, such as \'Students at risk of dropping out\' or \'Upcoming activities due\', can generate predictions, send insight notifications and offer further actions such as messaging users.';
+$string['configenableasyncresets'] = 'Resetting courses with lots of contents or enrolments through the frontend may be slow or time out. Enable this setting to offload course resets to asynchronous ad-hoc tasks.';
 $string['configenableblogs'] = 'This switch provides all site users with their own blog.';
 $string['configdisableuserimages'] = 'Disable the ability for users to change user profile images.';
 $string['configdisplayloginfailures'] = 'This will display information to users about previous failed logins.';
@@ -419,7 +421,7 @@ $string['configvariables'] = 'Variables';
 $string['configverifychangedemail'] = 'Enables verification of changed email addresses using allowed and denied email domains settings. If this setting is disabled the domains are enforced only when creating new users.';
 $string['configvisiblecourses'] = 'Display courses in hidden categories normally';
 $string['configwarning'] = 'Be careful modifying these settings - strange values could cause problems.';
-$string['configyuicomboloading'] = 'This options enables combined file loading optimisation for YUI libraries. This setting should be enabled on production sites for performance reasons.';
+$string['configyuicomboloading'] = 'This option enables combined file loading optimisation for YUI libraries. It should be enabled for performance reasons.';
 $string['confirmation'] = 'Confirmation';
 $string['confirmationpending'] = 'Confirmation pending';
 $string['confirmcontextlock'] = '{$a->contextname} is currently unfrozen. Freezing it will make it read-only and prevent users from making changes. Are you sure you wish to continue?';
@@ -597,6 +599,7 @@ $string['emoticons_desc'] = 'This form defines the emoticons (or smileys) used a
 $string['emoticonsreset'] = 'Reset emoticons setting to default values';
 $string['emptysettingvalue'] = 'Empty';
 $string['enableanalytics'] = 'Analytics';
+$string['enableasyncresets'] = 'Enable asynchronous course resets';
 $string['enableblogs'] = 'Enable blogs';
 $string['enablecalendarexport'] = 'Enable calendar export';
 $string['enablecomments'] = 'Enable comments';
@@ -613,14 +616,16 @@ $string['enableglobalsearch_desc'] = 'If enabled, data will be indexed and synch
 $string['enablegravatar'] = 'Enable Gravatar';
 $string['enablegravatar_help'] = 'When enabled Moodle will attempt to fetch a user profile picture from Gravatar if the user has not uploaded an image.';
 $string['enablemobilewebservice'] = 'Enable web services for mobile devices';
+$string['enablemycourses'] = 'Enable My Courses';
+$string['enablemycourses_help'] = 'If enabled, the My Courses page and its navigation link are available. If disabled, users are redirected to the configured \'Start page for users\'.';
+$string['enablemyhome'] = 'Enable Home';
+$string['enablemyhome_help'] = 'If enabled, the Home page and its navigation link are available. If disabled, users are redirected to the configured \'Start page for users\'.';
 $string['enablepdfexportfont'] = 'Enable PDF fonts';
 $string['enablepdfexportfont_desc'] = 'If your site has courses in different languages which need other fonts in generated PDF files, you can provide the option to set the font in the course settings. You need to specify available fonts in $CFG->pdfexportfont in config.php.';
 $string['enableplugin'] = 'Enable {$a}';
 $string['enablerecordcache'] = 'Enable record cache';
 $string['enablerssfeeds'] = 'Enable RSS feeds';
 $string['enablesearchareas'] = 'Enable search areas';
-$string['enablesharingtomoodlenet'] = 'Enable sharing to MoodleNet (outbound)';
-$string['enablesharingtomoodlenet_desc'] = 'Enable users to share course content to a configured MoodleNet instance if they have the relevant capability.';
 $string['enablestats'] = 'Enable statistics';
 $string['enabletrusttext'] = 'Enable trusted content';
 $string['enableuserfeedback'] = 'Enable feedback about this software';
@@ -834,16 +839,12 @@ $string['lockoutemailbody'] = 'Hi {$a->firstname},
 Your account with username {$a->username} on server \'{$a->sitename}\'
 was locked out after multiple invalid login attempts.
 
-To unlock the account immediately go to the following address
+To unlock the account immediately, please click the link below:
 
-{$a->link}
+<a href="{$a->link}">Unlock account</a>
 
-In most mail programs, this should appear as a blue link
-which you can just click on.  If that doesn\'t work,
-then copy and paste the address into the address
-line at the top of your web browser window.
 
-If you need help, please contact the site administrator,
+If you need help, please contact the site administrator.
 {$a->admin}';
 $string['lockoutemailsubject'] = 'Your account on {$a} was locked out';
 $string['lockouterrorunlock'] = 'Invalid account unlock information supplied.';
@@ -855,10 +856,12 @@ $string['lockrequestcategory'] = 'Prevent category selection';
 $string['log'] = 'Logs';
 $string['logguests'] = 'Log guest access';
 $string['logguests_help'] = 'This setting enables logging of actions by guest account and not logged in users. High profile sites may want to disable this logging for performance reasons. It is recommended to keep this setting enabled on production sites.';
+$string['login'] = 'Login';
 $string['logininfoinsecurelayout'] = 'Display logged-in user in secure layout';
 $string['logininfoinsecurelayout_desc'] = 'If enabled, the logged-in user\'s full name will be displayed in the navigation bar when attempting a quiz or other activity using secure layout.';
 $string['loginpageautofocus'] = 'Autofocus login page form';
 $string['loginpageautofocus_help'] = 'Enabling this option improves usability of the login page, but automatically focusing fields may be considered an accessibility issue.';
+$string['loginsettings'] = 'Login settings';
 $string['loglifetime'] = 'Keep logs for';
 $string['logo'] = 'Logo';
 $string['logo_desc'] = 'A full logo to be used as decoration by some themes (such as core themes). This image can be quite high resolution because it will be scaled down for use (and cached for performance). Logos that are wider than they are high usually give better results.';
@@ -884,6 +887,7 @@ $string['manageformatsgotosettings'] = 'Default format can be changed in {$a}';
 $string['managelang'] = 'Manage';
 $string['manageqbehaviours'] = 'Manage question behaviours';
 $string['manageqtypes'] = 'Manage question types';
+$string['marketplaceavailablenotice'] = 'Browse and download plugins on <a href="{$a}" target="_blank" rel="noopener noreferrer">Moodle Marketplace <i class="fa fa-external-link" role="img" aria-label="Opens in new window" title="Opens in new window"></i></a>.';
 $string['maturity50'] = 'Alpha';
 $string['maturity100'] = 'Beta';
 $string['maturity150'] = 'Release candidate';
@@ -925,6 +929,7 @@ $string['messagingdefaultpressenter'] = 'Use enter to send enabled by default';
 $string['messagingdeletereadnotificationsdelay'] = 'Delete read notifications';
 $string['messagingdeleteallnotificationsdelay'] = 'Delete all notifications';
 $string['messagingssettings'] = 'Messaging settings';
+$string['mimetexdeprecated'] = 'Since MimeTeX is no longer supported, please update your {$a->plugin_name} settings to use LaTeX instead. For best results, we recommend using MathJax to render math formulas.';
 $string['minpassworddigits'] = 'Digits';
 $string['minpasswordlength'] = 'Password length';
 $string['minpasswordlower'] = 'Lowercase letters';
@@ -983,6 +988,7 @@ $string['maxtimelimit'] = 'Maximum time limit';
 $string['maxtimelimit_desc'] = 'To restrict the maximum PHP execution time that Moodle will allow without any output being displayed, enter a value in seconds here. 0 means that Moodle default restrictions are used. If you have a front-end server with its own time limit, set this value lower to receive PHP errors in logs. Does not apply to CLI scripts.';
 $string['moodlebrandedapp'] = 'Branded Moodle app';
 $string['moodlebrandedappreference'] = 'Alternatively, get a <a href="https://moodle.com/branded-app/">Branded Moodle app</a> with your own custom branding.';
+$string['moodlenetremovalwarning'] = 'The MoodleNet service will be shut down on 20 April 2026. If you wish to continue using MoodleNet on your site, install the MoodleNet plugin from the <a href="https://github.com/moodlehq/moodle-tool_moodlenet" target="_blank">Moodle HQ GitHub repository <i class="fa fa-external-link" role="img" aria-label="Opens in new window" title="Opens in new window"></i></a> and connect it to a self-hosted MoodleNet instance. Following this, the MoodleNet profile ID field will be removed; please migrate that data if you are using it for other purposes.';
 $string['noreplyaddress'] = 'No-reply address';
 $string['noreplydomain'] = 'No-reply and domain';
 $string['noreplydomaindetail'] = 'Settings for No-reply and configured domains';
@@ -1171,6 +1177,21 @@ $string['requiremodintro'] = 'Require activity description';
 $string['requiremodintro_desc'] = 'If enabled, users will be forced to enter a description for each activity.';
 $string['required'] = 'Required';
 $string['requires'] = 'Requires';
+$string['routerconfigurationset'] = 'The web server is correctly configured.';
+$string['routerconfigureddetails'] = 'The router correctly serves <a href="{$a->docs}" target="_blank">{$a->url}</a> with a {$a->expectedstatuscode} ("{$a->expectedstatuscodetitle}") response.';
+$string['routerconfiguredok'] = 'The router appears to be configured correctly.';
+$string['routerconfiguredwithissues'] = 'The router is not correctly configured.';
+$string['routerconfiguredwithissuesdetail'] = 'The router is not correctly configured. Issues were detected in {$a->count} checks.';
+$string['routerdocs'] = 'Router documentation';
+$string['routerexpectedgot'] = 'Expected {$a->expectedstatuscode} ("{$a->expectedstatuscodetitle}") and received {$a->statuscode} ("{$a->statuscodetitle}").';
+$string['routerfailapipage'] = 'An <a href="{$a->url}" target="_blank">API route</a> did not respond with the expected response.';
+$string['routerfailmissingpage'] = 'The missing page handler did not respond to the <a href="{$a->url}" target="_blank">test URL</a> correctly.';
+$string['routerfailpage'] = 'A <a href="{$a->url}" target="_blank">standard page</a> controller could not be loaded correctly. The router may not be configured properly.';
+$string['routerfailroutershim'] = 'A <a href="{$a->url}" target="_blank">routed page with path ending in ".php"</a> did not respond correctly.';
+$string['routerfailshim'] = 'A <a href="{$a->url}" target="_blank">shimmed page</a> did not respond correctly.';
+$string['routernotconfigured'] = 'The router is not configured.';
+$string['routernotconfigureddetail'] = 'The router is not configured correctly. For details of how to configure it, see the documentation <a href="{$a->docs}">Configuring the router</a>.';
+$string['routernotconfigureddetailwithurl'] = 'The following URL did not return the expected status code: <a href="{$a->url}" target="_blank">{$a->url}</a>.';
 $string['purgecaches'] = 'Purge all caches';
 $string['purgecachesconfirm'] = 'Moodle can cache themes, JavaScript, language strings, filtered text, RSS feeds and other pieces of calculated data. Purging caches will delete data from the server and force browsers to re-fetch data, so you can be sure you are seeing the most up-to-date values produced by the current code. There is no danger in purging caches, but your site may appear slower for a while until the server and clients calculate new information and cache it.';
 $string['purgecachesfinished'] = 'All caches were purged.';

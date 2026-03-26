@@ -4135,9 +4135,10 @@ class curl {
      * @param string $url
      * @param array $params
      * @param array $options
+     * @param bool $includeuserpwd Whether to include CURLOPT_USERPWD if not already set
      * @return ?string
      */
-    public function put($url, $params = array(), $options = array()) {
+    public function put($url, $params = [], $options = [], $includeuserpwd = true) {
         $file = '';
         $fp = false;
         if (isset($params['file'])) {
@@ -4151,7 +4152,7 @@ class curl {
             } else {
                 return null;
             }
-            if (!isset($this->options['CURLOPT_USERPWD'])) {
+            if (!isset($this->options['CURLOPT_USERPWD']) && $includeuserpwd) {
                 $this->setopt(array('CURLOPT_USERPWD' => 'anonymous: noreply@moodle.org'));
             }
         } else {
@@ -5197,6 +5198,26 @@ function file_pluginfile($relativepath, $forcedownload, $preview = null, $offlin
             \core\session\manager::write_close(); // Unlock session during file serving.
             send_stored_file($file, 60*60, 0, $forcedownload, $sendfileoptions);
         }
+    } else if ($component === 'notes') {
+        require_login($course);
+
+        $noteid = (int) array_shift($args);
+
+        $note = $DB->get_record('post', ['module' => 'notes', 'id' => $noteid]);
+        $notecontext = \core\context\course::instance($note->courseid);
+
+        if ($context->id !== $notecontext->id || !has_capability('moodle/notes:view', $context)) {
+            send_file_not_found();
+        }
+
+        $filename = array_pop($args);
+        $file = $fs->get_file($context->id, $component, $filearea, $note->id, '/', $filename);
+        if ($file !== false && !$file->is_directory()) {
+            \core\session\manager::write_close();
+            send_stored_file($file, HOURSECS, 0, $forcedownload, $sendfileoptions);
+        }
+
+        send_file_not_found();
     } else if ($component === 'contentbank') {
         if ($filearea != 'public' || isguestuser()) {
             send_file_not_found();

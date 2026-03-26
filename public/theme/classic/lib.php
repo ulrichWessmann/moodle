@@ -108,11 +108,19 @@ function theme_classic_get_extra_scss($theme) {
 
     // Sets the login background image.
     $loginbackgroundimageurl = $theme->setting_file_url('loginbackgroundimage', 'loginbackgroundimage');
-    if (!empty($loginbackgroundimageurl)) {
-        $content .= 'body.pagelayout-login #page { ';
-        $content .= "background-image: url('$loginbackgroundimageurl'); background-size: cover;";
-        $content .= ' }';
+    $backgroundposition = '';
+    if (empty($loginbackgroundimageurl)) {
+        // Use the default login background image.
+        $loginbackgroundimageurl = $theme->image_url(
+            'login_background',
+            'theme',
+        );
+        // Set the default background position to ensure the watermark is visible.
+        $backgroundposition = 'background-position: bottom right;';
     }
+    $content .= 'body.pagelayout-login #page .login-layout-left { ';
+    $content .= "background-image: url('$loginbackgroundimageurl'); background-size: cover; {$backgroundposition}";
+    $content .= ' }';
 
     if (!empty($theme->settings->navbardark)) {
         $content .= file_get_contents($CFG->dirroot .

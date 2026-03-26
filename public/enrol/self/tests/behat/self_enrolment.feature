@@ -21,12 +21,14 @@ Feature: Users can auto-enrol themself in courses where self enrolment is allowe
   # test use of the singleselect functionality.
   @javascript
   Scenario: Self-enrolment enabled as guest
-    Given I log in as "teacher1"
+    Given the following config values are set as admin:
+      | guestloginbutton | 1 |
+    And I log in as "teacher1"
     And I add "Self enrolment" enrolment method in "Course 1" with:
       | Custom instance name | Test student enrolment |
     And I log out
     When I am on "Course 1" course homepage
-    And I press "Access as a guest"
+    And I press "Log in as guest"
     Then I should see "Guests cannot access this course. Please log in."
     And I press "Continue"
     And I should see "Log in"

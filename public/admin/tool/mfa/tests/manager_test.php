@@ -277,6 +277,14 @@ final class manager_test extends \advanced_testcase {
         $guideurl = new \moodle_url('/pluginfile.php/1/tool_mfa/guidance/0/capybara.png');
         $this->assertEquals(\tool_mfa\manager::NO_REDIRECT, \tool_mfa\manager::should_require_mfa($guideurl, false));
 
+        // Access the allowed theme pluginfile area via wildcard component rules.
+        $themeurl = new \moodle_url('/pluginfile.php/1/theme_boost/loginbackgroundimage/0/background.jpg');
+        $this->assertEquals(\tool_mfa\manager::NO_REDIRECT, \tool_mfa\manager::should_require_mfa($themeurl, false));
+
+        // Access a different theme pluginfile area which is not explicitly allowed.
+        $themeurl = new \moodle_url('/pluginfile.php/1/theme_classic/customfield/0/example.txt');
+        $this->assertEquals(\tool_mfa\manager::REDIRECT, \tool_mfa\manager::should_require_mfa($themeurl, false));
+
         // Access private area.
         $user3 = $this->getDataGenerator()->create_user();
         $privateurl = new \moodle_url("/pluginfile.php/{$user3->id}/user/private/privatefile.png");
@@ -435,6 +443,30 @@ final class manager_test extends \advanced_testcase {
 
         $this->assertTrue($CFG->mfa_config_hook_test);
         $this->assertTrue($SESSION->mfa_login_hook_test);
+    }
+
+    /**
+     * Tests that /login/confirm.php is excluded from MFA redirection.
+     *
+     * When a user follows an email self-registration confirmation link, MFA must
+     * not intercept the request before auth_email::user_confirm() has had a chance
+     * to restore the wantsurl from the auth_email_wantsurl user preference.
+     *
+     * @covers ::should_require_mfa
+     * @covers ::get_no_redirect_urls
+     */
+    public function test_confirm_url_no_redirect(): void {
+        $this->resetAfterTest(true);
+        $user = $this->getDataGenerator()->create_user();
+        $this->setUser($user);
+
+        $confirmurl = new \moodle_url('/login/confirm.php');
+        $this->assertEquals(
+            \tool_mfa\manager::NO_REDIRECT,
+            \tool_mfa\manager::should_require_mfa($confirmurl, false),
+            '/login/confirm.php must not trigger an MFA redirect so that auth_email can ' .
+            'restore wantsurl from the auth_email_wantsurl user preference first.'
+        );
     }
 
     /**

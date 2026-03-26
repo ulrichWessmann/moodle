@@ -102,8 +102,6 @@ $string['config_disablepublicchat_default'] = 'Disable public chat enabled by de
 $string['config_disablepublicchat_default_description'] = 'If enabled the public chat will be disabled.';
 $string['config_disablepublicchat_editable'] = 'Disable public chat can be edited';
 $string['config_disablepublicchat_editable_description'] = 'Disable public chat by default can be edited when the instance is added or updated.';
-$string['config_experimental_features'] = 'Experimental features';
-$string['config_experimental_features_description'] = 'Configuration for experimental features.';
 $string['config_extended_capabilities'] = 'Extended capabilities';
 $string['config_extended_capabilities_description'] = 'Configuration for extended capabilities when the BigBlueButton server offers them.';
 $string['config_general'] = 'General settings';
@@ -192,6 +190,8 @@ $string['config_scheduled_pre_opening'] = 'Accessible before opening time';
 $string['config_scheduled_pre_opening_description'] = 'The time in minutes that the room is open for prior to the scheduled opening time.';
 $string['config_server_url'] = 'BigBlueButton server URL';
 $string['config_server_url_description'] = 'The URL of your BigBlueButton server.';
+$string['config_session_access'] = 'Session Access';
+$string['config_session_access_description'] = 'Configuration for user access to sessions.';
 $string['config_shared_secret'] = 'BigBlueButton shared secret';
 $string['config_shared_secret_description'] = 'The security secret of your BigBlueButton server.';
 $string['config_showpresentation_default'] = 'Show presentation file on activity page';
@@ -381,16 +381,16 @@ $string['mod_form_field_welcome_help'] = 'The welcome message is displayed when 
 $string['mod_form_locksettings'] = 'Lock settings';
 $string['modulename'] = 'BigBlueButton';
 $string['modulename_help'] = '###### Key features
-- Host live sessions with audio, video, and chat
-- Use built-in quizzes and polling tools
-- Share slides, your screen, or a collaborative whiteboard
-- Create breakout rooms for activities in groups
-- Record sessions so students can watch later
+*  Host live sessions with audio, video, and chat
+*  Use built-in quizzes and polling tools
+*  Share slides, your screen, or a collaborative whiteboard
+*  Create breakout rooms for activities in groups
+*  Record sessions so students can watch later
 
 ###### Ways to use it
-- Run a live online lecture where students can ask questions in real time
-- Hold virtual office hours
-- Organise group discussions using breakout rooms';
+*  Run a live online lecture where students can ask questions in real time
+*  Hold virtual office hours
+*  Organise group discussions using breakout rooms';
 $string['modulename_link'] = 'BigBlueButton/view';
 $string['modulename_summary'] = 'Host live online sessions with video, audio, and tools for presenting and collaborating.';
 $string['modulenameplural'] = 'BigBlueButton';
@@ -442,7 +442,7 @@ $string['resetevents'] = 'Delete events';
 $string['resetlogs'] = 'Delete custom logs';
 $string['resetlogs_help'] = 'Deleting the logs will result in lost references to recordings.';
 $string['resetrecordings'] = 'Delete recordings';
-$string['resetrecordings_help'] = 'Deleting the recordings will make them inaccessible from anywhere. This action cannot be undone!';
+$string['resetrecordings_help'] = 'Deleting the recordings will remove them from this course. The media stored on the BigBlueButton server are not affected.';
 $string['resettags'] = 'Delete tags';
 $string['search:activity'] = 'BigBlueButton - activity information';
 $string['search:tags'] = 'BigBlueButton - tags information';
@@ -528,7 +528,7 @@ $string['view_recording_button_import'] = 'Import recording links';
 $string['view_recording_button_return'] = 'Go back';
 $string['view_recording_course'] = 'Course';
 $string['view_recording_date'] = 'Date';
-$string['view_recording_delete_confirmation'] = 'Are you sure you want to delete {$a}?';
+$string['view_recording_delete_confirmation'] = 'Are you sure you want to permanently delete the {$a}? This will remove the media file from the BigBlueButton server and cannot be undone.';
 $string['view_recording_delete_confirmation_warning_p'] = 'This recording has {$a} links associated that were imported into different courses or activities. If the recording is deleted, these links will also be removed.';
 $string['view_recording_delete_confirmation_warning_s'] = 'This recording has {$a} link associated that was imported into a different course or activity. If the recording is deleted, this link will also be removed.';
 $string['view_recording_description'] = 'Description';
@@ -616,3 +616,6 @@ $string['waitformoderator'] = 'Waiting for a moderator to join.';
 // Deprecated since Moodle 4.5.
 $string['view_mobile_message_groups_not_supported'] = 'This instance is enabled to work with groups but the mobile app doesn\'t yet support it. Please use the web version.';
 $string['view_mobile_message_reload_page_creation_time_meeting'] = 'You exceeded 45 seconds on this page. Please refresh the page to join the session.';
+// Deprecated since Moodle 5.2.
+$string['config_experimental_features'] = 'Experimental features';
+$string['config_experimental_features_description'] = 'Configuration for experimental features.';

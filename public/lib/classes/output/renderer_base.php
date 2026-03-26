@@ -101,6 +101,7 @@ class renderer_base {
             $pixhelper = new mustache_pix_helper($this);
             $shortentexthelper = new mustache_shorten_text_helper();
             $userdatehelper = new mustache_user_date_helper();
+            $reacthelper = new mustache_react_helper();
 
             // We only expose the variables that are exposed to JS templates.
             $safeconfig = $this->page->requires->get_config_for_javascript($this->page, $this);
@@ -113,6 +114,7 @@ class renderer_base {
                 'pix' => [$pixhelper, 'pix'],
                 'shortentext' => [$shortentexthelper, 'shorten'],
                 'userdate' => [$userdatehelper, 'transform'],
+                'react' => [$reacthelper, 'react'],
             ];
 
             $this->mustache = new mustache_engine([
@@ -419,14 +421,6 @@ class renderer_base {
     public function should_display_navbar_logo() {
         $logo = $this->get_compact_logo_url();
         return !empty($logo);
-    }
-
-    /**
-     * @deprecated since Moodle 4.0
-     */
-    #[\core\attribute\deprecated(null, reason: 'It is no longer used', since: '4.0', final: true)]
-    public function should_display_main_logo() {
-        \core\deprecation::emit_deprecation([self::class, __FUNCTION__]);
     }
 
     /**
